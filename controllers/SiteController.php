@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\User;
+use app\models\Role;
+use app\models\Status;
 
 class SiteController extends Controller
 {
@@ -130,7 +132,8 @@ class SiteController extends Controller
     public function actionRegister() {
         $model = new User();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->setPassword($model->password);
+            $model->role_id = Role::USER_ROLE_ID;
+            $model->status_id = Status::NEW_STATUS;
             if ($model->save()) {
                 return $this->redirect(['site/index']);
             }
