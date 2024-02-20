@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+//use yii\helpers\VarDumper;
 
 /**
  * LoginForm is the model behind the login form.
@@ -42,8 +43,18 @@ class LoginForm extends Model
         if ($this->validate()) {
             // Проверка на то, что пользователь не null
             $user = $this->getUser();
+
+            
+            
+
             if ($user) {
-                return Yii::$app->user->login($user, $this->rememberMe ? 3600*24*30 : 0);
+                if (!($user->status_id == 2)) {
+                    $this->addError('password', 'Ваш аккаунт не подтвержден');
+                    return false;
+                }
+                else {
+                    return Yii::$app->user->login($user, $this->rememberMe ? 3600*24*30 : 0);
+                }
             }
         }
         // Добавление ошибки взято из удаленного метода validatePassword
