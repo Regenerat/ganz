@@ -30,9 +30,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['fio', 'number', 'email', 'login', 'password'], 'required'],
+            [['fio', 'phone', 'email', 'login', 'password'], 'required'],
             [['fio', 'email', 'login', 'password'], 'string', 'max' => 255],
-            [['number'], 'string', 'max' => 11],
+            [['phone'], 'string', 'max' => 11],
         ];
     }
 
@@ -44,7 +44,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'id' => 'ID',
             'fio' => 'Fio',
-            'number' => 'Number',
+            'phone' => 'Phone',
             'email' => 'Email',
             'login' => 'Login',
             'password' => 'Password',
@@ -56,7 +56,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      *
      * @return \yii\db\ActiveQuery
      */
-    
+
     /**
      * Функция поиска пользователя по логину и паролю
      * @param string $login Логин пользователя
